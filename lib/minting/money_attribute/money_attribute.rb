@@ -6,8 +6,8 @@ module Mint
       # Money attribute
       def money_attribute(name, allow_nil: true, currency: 'GBP', composite: nil, mapping: nil)
         if attribute_names.include? name.to_s
-          attribute(name, :mint, currency:)
-          normalizes(name, with: ->(value) { Offer.parse_money(value, currency) })
+          attribute(name, :mint_money, currency:)
+          normalizes(name, with: ->(value) { parse_money(value, currency) })
         else
           composite = find_money_attributes(name, mapping:)
           mapping = { composite[:amount] => :to_i, composite[:currency] => :currency_code }

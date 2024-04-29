@@ -35,7 +35,7 @@ class Mint::MoneyAttributeTest < ActiveSupport::TestCase
 
   test 'agregated money attribute' do
     offer = Offer.new(price_amount: 17.01, price_currency: :EUR)
-    assert_equal 17.01.euros, offer.price
 
+    assert_equal 17.01.euros, offer.price
   end
 end

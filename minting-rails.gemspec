@@ -5,9 +5,9 @@ Gem::Specification.new do |spec|
   spec.version     = Minting::Rails::VERSION
   spec.authors     = ["Gilson Ferraz"]
   spec.email       = ["gilson@cesar.etc.br"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of Minting::Rails."
-  spec.description = "TODO: Description of Minting::Rails."
+  spec.homepage    = "https://github.com/gferraz/minting-rails"
+  spec.summary     = "Money attributes to ActiveRecord"
+  spec.description = ""
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
@@ -15,8 +15,8 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/gferraz/minting-rails"
+  spec.metadata["changelog_uri"] = "https://github.com/gferraz/minting-rails/releases"
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]

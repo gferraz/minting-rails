@@ -1,4 +1,4 @@
-module Minting
+module Mint
   module MoneyAttribute
     extend ActiveSupport::Concern
 
@@ -61,5 +61,5 @@ module Minting
   end
 end
 
-ActiveRecord::Base.include Minting::MoneyAttribute
+ActiveRecord::Base.include Mint::MoneyAttribute
 

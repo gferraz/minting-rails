@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Minting::CoreExtTest < ActiveSupport::TestCase
+class Mint::CoreExtTest < ActiveSupport::TestCase
   test "it adds to_money and mint to Numeric" do
     assert_equal Mint.money(12, :USD), 12.to_money(:USD)
     assert_equal Mint.money(15, :BRL), 15.00.mint(:BRL)

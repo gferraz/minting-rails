@@ -1,8 +1,8 @@
-require_relative "lib/minting/rails/version"
+require_relative "lib/minting/money_attribute/version"
 
 Gem::Specification.new do |spec|
   spec.name        = "minting-rails"
-  spec.version     = Minting::Rails::VERSION
+  spec.version     = Mint::MoneyAttribute::VERSION
   spec.authors     = ["Gilson Ferraz"]
   spec.email       = ["gilson@cesar.etc.br"]
   spec.homepage    = "https://github.com/gferraz/minting-rails"

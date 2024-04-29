@@ -1,4 +1,4 @@
-# Minting::Rails
+# Mint::Rails
 
 Add Money attributes to your Rails application.
 

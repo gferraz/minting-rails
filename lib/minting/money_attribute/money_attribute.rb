@@ -4,7 +4,7 @@ module Mint
 
     class_methods do
       # Money attribute
-      def money_attribute(name, allow_nil: true, currency: 'GBP', composite: nil, mapping: nil)
+      def money_attribute(name, currency: 'GBP', mapping: nil)
         if attribute_names.include? name.to_s
           attribute(name, :mint_money, currency:)
           normalizes(name, with: ->(value) { parse_money(value, currency) })
@@ -12,13 +12,11 @@ module Mint
           composite = find_money_attributes(name, mapping:)
           mapping = { composite[:amount] => :to_i, composite[:currency] => :currency_code }
           options = {
-            allow_nil:, class_name: 'Mint::Money', mapping:,
+            allow_nil: true, class_name: 'Mint::Money', mapping:,
             constructor: proc { |amount, currency_code|
-              puts 'constructor'
               parse_money(amount, currency_code || currency)
             },
             converter: proc { |amount, currency_code|
-              puts "convert: #{amount.inspect}, #{currency_code.inspect}"
               parse_money(amount, currency_code || currency)
             }
           }
@@ -30,7 +28,7 @@ module Mint
 
       def find_money_attributes(name, mapping:)
         {}.tap do |c|
-          if mapping
+          if mapping.present?
             c[:amount] = mapping.key(:amount).to_s
             c[:currency] = mapping.key(:currency).to_s
           else

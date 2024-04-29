@@ -1,8 +1,10 @@
 # Minting::Rails
-Short description and motivation.
+
+Add Money attributes to your Rails application.
+
 
 ## Usage
-How to use my plugin.
+Currently in development. Please wait for 1.0 release.
 
 ## Installation
 Add this line to your application's Gemfile:

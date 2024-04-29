@@ -7,14 +7,14 @@ module Mint
       def money_attribute(name, allow_nil: true, currency: 'GBP', composite: nil, mapping: nil)
         if attribute_names.include? name.to_s
           attribute(name, :mint, currency:)
-          normalizes(name, with: -> value { Offer.parse_money(value, currency) })
+          normalizes(name, with: ->(value) { Offer.parse_money(value, currency) })
         else
           composite = find_money_attributes(name, mapping:)
           mapping = { composite[:amount] => :to_i, composite[:currency] => :currency_code }
           options = {
             allow_nil:, class_name: 'Mint::Money', mapping:,
             constructor: proc { |amount, currency_code|
-              puts "constructor";
+              puts 'constructor'
               parse_money(amount, currency_code || currency)
             },
             converter: proc { |amount, currency_code|
@@ -56,10 +56,8 @@ module Mint
           Mint.money(amount.to_s.split[0].to_r, currency)
         end
       end
-
     end
   end
 end
 
 ActiveRecord::Base.include Mint::MoneyAttribute
-

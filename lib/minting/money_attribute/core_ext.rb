@@ -11,9 +11,9 @@ class Numeric
     Mint.money(self, 'EUR')
   end
 
-  alias_method :dollar, :dollars
-  alias_method :euro, :euros
-  alias_method :mint, :to_money
+  alias dollar dollars
+  alias euro euros
+  alias mint to_money
 end
 
 class String
@@ -21,6 +21,5 @@ class String
     Mint.money(to_r, currency)
   end
 
-  alias_method :mint, :to_money
+  alias mint to_money
 end
-

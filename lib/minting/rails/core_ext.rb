@@ -1,5 +1,3 @@
-
-
 class Numeric
   def to_money(currency)
     Mint.money(self, currency)

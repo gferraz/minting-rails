@@ -2,9 +2,5 @@ require "minting/rails/version"
 require "minting/rails/core_ext"
 require "minting/rails/railtie"
 
-module Minting
-  module Rails
+require "minting/money_attribute"
 
-
-  end
-end

@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/gferraz/minting.git
+  revision: 77d566f7c314b3a896925b990c8961505c00cd8a
+  specs:
+    minting (0.2.0)
+
 PATH
   remote: .
   specs:
@@ -179,16 +185,12 @@ GEM
       psych (>= 4.0.0)
     reline (0.5.3)
       io-console (~> 0.5)
-    sqlite3 (2.0.1-aarch64-linux-gnu)
-    sqlite3 (2.0.1-aarch64-linux-musl)
-    sqlite3 (2.0.1-arm-linux-gnu)
-    sqlite3 (2.0.1-arm-linux-musl)
-    sqlite3 (2.0.1-arm64-darwin)
-    sqlite3 (2.0.1-x86-linux-gnu)
-    sqlite3 (2.0.1-x86-linux-musl)
-    sqlite3 (2.0.1-x86_64-darwin)
-    sqlite3 (2.0.1-x86_64-linux-gnu)
-    sqlite3 (2.0.1-x86_64-linux-musl)
+    sqlite3 (1.7.3-aarch64-linux)
+    sqlite3 (1.7.3-arm-linux)
+    sqlite3 (1.7.3-arm64-darwin)
+    sqlite3 (1.7.3-x86-linux)
+    sqlite3 (1.7.3-x86_64-darwin)
+    sqlite3 (1.7.3-x86_64-linux)
     stringio (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
@@ -217,9 +219,10 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  minting!
   minting-rails!
   puma
-  sqlite3
+  sqlite3 (~> 1.4)
 
 BUNDLED WITH
    2.5.9

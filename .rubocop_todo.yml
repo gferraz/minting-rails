@@ -14,29 +14,7 @@ Gemspec/RequireMFA:
   Exclude:
     - 'minting-rails.gemspec'
 
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
-# URISchemes: http, https
-Layout/LineLength:
-  Max: 119
 
-# Offense count: 1
-# Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
-# AllowedMethods: refine
-Metrics/BlockLength:
-  Max: 42
 
-# Offense count: 6
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: always, always_true, never
-Style/FrozenStringLiteralComment:
-  Exclude:
-    - 'lib/minting/money_attribute/core_ext.rb'
-    - 'lib/minting/money_attribute/money_attribute.rb'
-    - 'lib/minting/money_attribute/money_type.rb'
-    - 'lib/minting/money_attribute/railtie.rb'
-    - 'lib/minting/money_attribute/version.rb'
-    - 'lib/minting/rails.rb'
+
 

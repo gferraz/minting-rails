@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 module Mint
+  # MoneyAttribute
   module MoneyAttribute
     extend ActiveSupport::Concern
 
     class_methods do
       # Money attribute
       def money_attribute(name, currency: 'GBP', mapping: nil)
-        parser = proc { |amount, code = currency|  parse_money(amount, code) }
+        parser = proc { |amount, code = currency| parse_money(amount, code) }
         if attribute_names.include? name.to_s
           attribute(name, :mint_money, currency:)
           normalizes(name, with: parser)
@@ -38,7 +41,7 @@ module Mint
       end
 
       def parse_money(amount, currency)
-        money = case amount
+        case amount
         when NilClass
           nil
         when Mint::Money
@@ -49,7 +52,6 @@ module Mint
           Mint.money(amount.to_s.split[0].to_r, currency)
         end
         # puts "parse(#{amount}, #{currency}) => #{money.inspect}"
-        money
       end
     end
   end

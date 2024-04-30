@@ -1,5 +1,7 @@
+# frozen_string_literal: true
 
 module Mint
+  # MintMoneyType
   class MintMoneyType < ActiveRecord::Type::Value
     def initialize(currency:)
       @currency = Mint.currency currency

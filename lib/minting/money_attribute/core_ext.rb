@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# :nodoc
 class Numeric
   def to_money(currency)
     Mint.money(self, currency)
@@ -16,6 +19,7 @@ class Numeric
   alias mint to_money
 end
 
+# :nodoc
 class String
   def to_money(currency)
     Mint.money(to_r, currency)

@@ -37,5 +37,6 @@ module Mint
 end
 
 ActiveSupport.on_load(:active_record) do
+  ActiveRecord::Base.include Mint::MoneyAttribute
   ActiveRecord::Type.register(:mint_money, Mint::MintMoneyType)
 end

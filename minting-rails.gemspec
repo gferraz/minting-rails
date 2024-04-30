@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/minting/money_attribute/version'
 
 Gem::Specification.new do |spec|

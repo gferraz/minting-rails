@@ -21,7 +21,6 @@ module Mint
     end
 
     def deserialize(value)
-      puts "deserialize #{value.inspect}"
       value && Mint.money(value, @currency)
     end
 

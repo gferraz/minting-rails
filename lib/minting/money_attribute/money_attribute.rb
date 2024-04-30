@@ -5,20 +5,16 @@ module Mint
     class_methods do
       # Money attribute
       def money_attribute(name, currency: 'GBP', mapping: nil)
+        parser = proc { |amount, code = currency|  parse_money(amount, code) }
         if attribute_names.include? name.to_s
           attribute(name, :mint_money, currency:)
-          normalizes(name, with: ->(value) { parse_money(value, currency) })
+          normalizes(name, with: parser)
         else
-          composite = find_money_attributes(name, mapping:)
-          mapping = { composite[:amount] => :to_i, composite[:currency] => :currency_code }
+          aggregated = find_money_attributes(name, mapping:)
           options = {
-            allow_nil: true, class_name: 'Mint::Money', mapping:,
-            constructor: proc { |amount, currency_code|
-              parse_money(amount, currency_code || currency)
-            },
-            converter: proc { |amount, currency_code|
-              parse_money(amount, currency_code || currency)
-            }
+            allow_nil: true, class_name: 'Mint::Money',
+            constructor: parser, converter: parser,
+            mapping: { aggregated[:amount] => :to_i, aggregated[:currency] => :currency_code }
           }
           composed_of(name, options)
         end
@@ -42,8 +38,7 @@ module Mint
       end
 
       def parse_money(amount, currency)
-        puts "parse(#{amount}, #{currency})"
-        case amount
+        money = case amount
         when NilClass
           nil
         when Mint::Money
@@ -53,6 +48,8 @@ module Mint
         else
           Mint.money(amount.to_s.split[0].to_r, currency)
         end
+        # puts "parse(#{amount}, #{currency}) => #{money.inspect}"
+        money
       end
     end
   end

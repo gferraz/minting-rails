@@ -1,26 +1,28 @@
-require_relative "lib/minting/money_attribute/version"
+require_relative 'lib/minting/money_attribute/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = "minting-rails"
+  spec.name        = 'minting-rails'
   spec.version     = Mint::MoneyAttribute::VERSION
-  spec.authors     = ["Gilson Ferraz"]
-  spec.email       = ["gilson@cesar.etc.br"]
-  spec.homepage    = "https://github.com/gferraz/minting-rails"
-  spec.summary     = "Money attributes to ActiveRecord"
-  spec.description = ""
-  spec.license     = "MIT"
+  spec.authors     = ['Gilson Ferraz']
+  spec.email       = ['gilson@cesar.etc.br']
+  spec.homepage    = 'https://github.com/gferraz/minting-rails'
+  spec.summary     = 'Money attributes to ActiveRecord'
+  spec.description = ''
+  spec.license     = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/gferraz/minting-rails"
-  spec.metadata["changelog_uri"] = "https://github.com/gferraz/minting-rails/releases"
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/gferraz/minting-rails'
+  spec.metadata['changelog_uri'] = 'https://github.com/gferraz/minting-rails/releases'
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+    Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end
 
-  spec.add_dependency "rails", ">= 7.1.3.2"
+  spec.required_ruby_version = '>= 3.3'
+
+  spec.add_dependency 'rails', '>= 7.1.3.2'
 end

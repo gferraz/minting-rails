@@ -1,0 +1,25 @@
+require:
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rake
+
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'test/dummy/**/*'
+  NewCops: enable
+  TargetRubyVersion: 3.3
+
+Layout/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 30
+
+Minitest/MultipleAssertions:
+  Max: 4
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always

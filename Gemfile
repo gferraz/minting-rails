@@ -1,11 +1,11 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Specify your gem's dependencies in minting-rails.gemspec.
 gemspec
 
-gem "puma"
-gem "sqlite3", "~> 1.4"
+gem 'puma'
+gem 'sqlite3', '~> 1.4'
 
 gem 'minting', git: 'https://github.com/gferraz/minting.git'
 

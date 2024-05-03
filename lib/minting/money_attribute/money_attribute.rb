@@ -38,22 +38,22 @@ module Mint
     end
 
     def self.parse(amount, currency)
-      case amount
-      when NilClass
-        nil
-      when Mint::Money
-        amount
-      when Numeric
-        Mint.money(amount, currency)
-      else
-        if amount.respond_to? :to_money
-          amount.to_money(currency)
-        else
-          Mint.money(amount.to_s.split[0].to_r, currency)
-        end
-      end
-      # puts "parse(#{amount}, #{currency}) => #{money.inspect}"
+      money = case amount
+              when NilClass
+                nil
+              when Mint::Money
+                amount
+              when Numeric
+                Mint.money(amount, currency)
+              else
+                if amount.respond_to? :to_money
+                  amount.to_money(currency)
+                else
+                  Mint.money(amount.to_s.split[0].to_r, currency)
+                end
+              end
+      puts "parse(#{amount}, #{currency}) => #{money.inspect}"
+      money
     end
   end
 end
-

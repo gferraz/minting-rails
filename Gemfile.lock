@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/gferraz/minting.git
-  revision: 77d566f7c314b3a896925b990c8961505c00cd8a
+  revision: 0971b496ab22b6b2328a99994198b76889b3fb1c
   specs:
     minting (0.2.0)
 
@@ -101,8 +101,8 @@ GEM
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
-    irb (1.12.0)
-      rdoc
+    irb (1.13.0)
+      rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -183,7 +183,7 @@ GEM
     rake (13.2.1)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
-    reline (0.5.3)
+    reline (0.5.5)
       io-console (~> 0.5)
     sqlite3 (1.7.3-aarch64-linux)
     sqlite3 (1.7.3-arm-linux)

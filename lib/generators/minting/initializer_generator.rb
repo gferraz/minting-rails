@@ -6,7 +6,7 @@ module Mint
       desc 'Creates Minting initializer.'
 
       def copy_initializer
-        copy_file 'minting.rb', 'config/initializers/money.rb'
+        copy_file 'minting.rb', 'config/initializers/minting.rb'
       end
     end
   end

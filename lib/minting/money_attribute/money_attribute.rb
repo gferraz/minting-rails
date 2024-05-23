@@ -7,7 +7,8 @@ module Mint
 
     class_methods do
       # Money attribute
-      def money_attribute(name, currency: 'GBP', mapping: nil)
+      def money_attribute(name, currency: Mint.default_currency, mapping: nil)
+        currency = Mint.assert_valid_currency!(currency)
         parser = proc { |amount, code = currency| MoneyAttribute.parse(amount, code) }
         if attribute_names.include? name.to_s
           attribute(name, :mint_money, currency:)
@@ -52,7 +53,7 @@ module Mint
                   Mint.money(amount.to_s.split[0].to_r, currency)
                 end
               end
-      puts "parse(#{amount}, #{currency}) => #{money.inspect}"
+       # puts "parse(#{amount}, #{currency.inspect}) => #{money.inspect}"
       money
     end
   end

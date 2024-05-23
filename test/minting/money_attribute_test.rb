@@ -19,9 +19,9 @@ module Mint
     test 'agregated money attribute parses any amount to the default currency' do
       offer = Offer.new(price: '12')
 
-      assert_equal 12.to_money('GBP'), offer.price
+      assert_equal Mint.money(12, Mint.default_currency), offer.price
       assert_equal 12, offer.price_amount
-      assert_equal 'GBP', offer.price_currency
+      assert_equal Mint.default_currency.code, offer.price_currency
     end
 
     test 'agregated money attribute are saved correctly' do
@@ -42,9 +42,9 @@ module Mint
     end
 
     test 'agregated money attribute' do
-      offer = Offer.new(price_amount: 17.01, price_currency: :EUR)
+      offer = Offer.new(price_amount: 17.01, price_currency: :USD)
 
-      assert_equal 17.01.euros, offer.price
+      assert_equal 17.01.dollars, offer.price
     end
   end
 end

@@ -30,7 +30,7 @@ $ gem install minting-rails
 
 - API Documentation
 - Internationalization
-- Publish 1.0
+- Publish 1.0 Beta
 
 ## Contributing
 

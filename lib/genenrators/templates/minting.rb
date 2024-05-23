@@ -26,7 +26,6 @@ Mint.configure do |config|
   # It must be a registered currency
   # config.default_currency = 'USD'
 
-
   # Specify a rounding mode
   # Any one of:
   #

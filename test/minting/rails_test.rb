@@ -22,6 +22,5 @@ module Mint
       assert_raises(ArgumentError) {  Mint.assert_valid_currency!('EUR') }
       assert_raises(ArgumentError) {  Mint.assert_valid_currency!('GBP') }
     end
-
   end
 end

@@ -17,13 +17,19 @@ gem "minting-rails"
 And then execute:
 
 ```bash
-  $ bundle
+  bundle
 ```
 
 Or install it yourself as:
 
 ```bash
-$ gem install minting-rails
+gem install minting-rails
+```
+
+After intalling generate Minting configuration initializer:
+
+```sh
+rails g mint:initializer
 ```
 
 ## To do

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minting-rails (0.1.0)
+    minting-rails (0.2.0)
       rails (>= 7.1.3.2)
 
 GEM

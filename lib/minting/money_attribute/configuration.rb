@@ -21,10 +21,6 @@ module Mint
   end
 
   def self.valid_currency_codes
-    @valid_currency_codes ||= if config.enabled_currencies == :all
-                                Mint.currencies
-                              else
-                                config.enabled_currencies.to_set
-                              end
+    config.enabled_currencies == :all ? Mint.currencies.keys : config.enabled_currencies
   end
 end

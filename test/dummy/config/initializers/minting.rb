@@ -2,8 +2,6 @@
 
 Mint.configure do |config|
 
-
-
   # Register a custom currency
   #
   # Example:
@@ -12,8 +10,8 @@ Mint.configure do |config|
   #   Mint.register_currency 'NGN', subunit: 3, synbol: '₦'
   # ]
   config.added_currencies = [
-    Mint.register_currency('CRC', subunit: 2, symbol: '₡'),
-    Mint.register_currency('NGN', subunit: 3, symbol: '₦')
+    {currency: 'CRC', subunit: 2, symbol: '₡'},
+    {currency: 'NGN', subunit: 3, symbol: '₦'}
   ]
 
   # Enable currencies
@@ -21,7 +19,7 @@ Mint.configure do |config|
   # Example:
   # config.enabled_currencies = :all
 
-  config.enabled_currencies = %w[BRL CRC NGN USD]
+  config.enabled_currencies = :all
 
 
   # To set the default currency
@@ -31,7 +29,7 @@ Mint.configure do |config|
   config.default_currency = 'BRL'
 
 
-  # Specify a rounding mode
+  # Specify a rounding mode (not yet implemented)
   # Any one of:
   #
   # BigDecimal::ROUND_UP,

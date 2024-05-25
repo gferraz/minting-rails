@@ -6,9 +6,9 @@ Mint.configure do |config|
   #
   # Example:
   #   config.added_currencies = [
-  #   Mint.register_currency 'CRC', subunit: 2, symbol: '₡'
-  #   Mint.register_currency 'NGN', subunit: 3, synbol: '₦'
-  # ]
+  #     {currency: 'CRC', subunit: 2, symbol: '₡'},
+  #    {currency: 'NGN', subunit: 3, symbol: '₦'}
+  #   ]
   config.added_currencies = [
     {currency: 'CRC', subunit: 2, symbol: '₡'},
     {currency: 'NGN', subunit: 3, symbol: '₦'}

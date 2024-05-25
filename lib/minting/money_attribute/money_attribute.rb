@@ -39,7 +39,7 @@ module Mint
     end
 
     def self.parse(amount, currency)
-      case amount
+      money = case amount
       when NilClass
         nil
       when Mint::Money
@@ -54,6 +54,8 @@ module Mint
         end
       end
       # puts "parse(#{amount}, #{currency.inspect}) => #{money.inspect}"
+      Mint.assert_valid_currency!(currency)
+      money
     end
   end
 end

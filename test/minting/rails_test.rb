@@ -15,7 +15,8 @@ module Mint
 
     test 'enable currencies configuration' do
       assert_equal :all, Mint.config.enabled_currencies
-      assert_equal ["AUD", "BRL", "CAD", "CHF", "CNY", "EUR", "GBP", "JPY", "MXN", "NZD", "PEN", "SEK", "USD"], Mint.valid_currency_codes
+      assert_equal %w[AUD BRL CAD CHF CNY EUR GBP JPY MXN NZD PEN SEK USD],
+                   Mint.valid_currency_codes
 
       assert_equal Mint.currency('BRL'), Mint.assert_valid_currency!('BRL')
       assert_equal Mint.currency('USD'), Mint.assert_valid_currency!('USD')

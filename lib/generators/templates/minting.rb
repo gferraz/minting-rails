@@ -1,7 +1,7 @@
 # encoding : utf-8
 # frozen_string_literal: true
-Mint.configure do |config|
 
+Mint.configure do |config|
   # Register a custom currency
   #
   # Example:
@@ -10,8 +10,8 @@ Mint.configure do |config|
   #    {currency: 'NGN', subunit: 3, symbol: '₦'}
   #   ]
   config.added_currencies = [
-    {currency: 'CRC', subunit: 2, symbol: '₡'},
-    {currency: 'NGN', subunit: 3, symbol: '₦'}
+    { currency: 'CRC', subunit: 2, symbol: '₡' },
+    { currency: 'NGN', subunit: 3, symbol: '₦' }
   ]
 
   # Enable currencies
@@ -21,13 +21,11 @@ Mint.configure do |config|
 
   config.enabled_currencies = :all
 
-
   # To set the default currency
   #
   # It must be a registered currency
   #
   config.default_currency = 'BRL'
-
 
   # Specify a rounding mode (not yet implemented)
   # Any one of:

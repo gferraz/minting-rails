@@ -4,12 +4,12 @@ module Mint
   # MoneyAttribute
   module MoneyAttribute
     class Parser
-      def initialize(currency = Mint.default_currency)
-        @default_currency = currency
+      def initialize(currency)
+        @default_currency = Currency.resolve!(currency)
       end
 
-      def parse(amount, currency = @default_currency)
-        currency = Currency.resolve!(currency)
+      def parse(amount, currency = nil)
+        currency = Currency.resolve!(currency || @default_currency)
         case amount
         when NilClass    then nil
         when Numeric     then Mint::Money.from(amount, currency)

@@ -74,17 +74,16 @@ bin/rails g mint:initializer
 
 The generator creates `config/initializers/minting.rb`.
 
-## Configuration
+## Custom currencies
+
+Register non-ISO currencies in `config/initializers/minting.rb`:
 
 ```ruby
-# config/initializers/minting.rb
-Mint.configure do |config|
-  config.default_currency = 'USD'
-  # enabled_currencies removed — all registered currencies are valid
-end
+Currency.register(code: 'CRC', subunit: 2, symbol: '₡')
+Currency.register(code: 'NGN', subunit: 3, symbol: '₦')
 ```
 
-See the [Minting gem](https://github.com/gferraz/minting) for full configuration options (custom currencies, formatting, rounding).
+See the [Minting gem](https://github.com/gferraz/minting) for full details on custom currencies, formatting, and rounding.
 
 ### I18n / Locale-aware formatting
 
@@ -216,9 +215,13 @@ offer.price_amount   # => 15.0
 offer.price_currency # => "EUR"
 ```
 
-When assigning a plain number or string, `Mint.default_currency` is used:
+The currency is determined by the `money_attribute` declaration:
 
 ```ruby
+class Offer < ApplicationRecord
+  money_attribute :price, currency: 'USD'
+end
+
 offer = Offer.new(price: '12')
 offer.price.currency.code # => "USD"
 ```
@@ -459,10 +462,10 @@ Minting-rails is intentionally minimal — it focuses on storing and reading mon
 | **I18n / locale files** | Locale-aware formatting via I18n `number.currency.format` — reads your existing translations, no extra setup | Built-in locale-aware formatting with bundled translations |
 | **Test matcher** | `monetize(:price_cents)` RSpec matcher | None |
 | **Currency exchange** | `default_bank`, `add_rate`, EuCentralBank | None |
-| **Custom currencies** | `register_currency` for non-ISO codes | Via `minting` gem config |
+| **Custom currencies** | `register_currency` for non-ISO codes | Via `Currency.register` in initializer |
 | **Validation integration** | `validates_numericality_of` auto-added | Must add manually |
-| **Rounding mode** | Configurable `rounding_mode` | None |
-| **Per-request currency** | Lambda-based for multi-tenant apps | Static default only |
+| **Rounding mode** | Configurable `rounding_mode` | Via `Mint.with_rounding` block |
+| **Per-request currency** | Lambda-based for multi-tenant apps | Static per attribute only |
 | **Allow nil** | `monetize :x, allow_nil: true` | Must handle nil manually |
 | **Parse error control** | `raise_error_on_money_parsing` option | Always raises |
 | **Community** | 1.9k stars, 386 forks, 897 commits | New gem |
@@ -471,7 +474,6 @@ If you need any of these features today, money-rails may be a better fit. mintin
 
 ## Roadmap
 
-1. **Allow nil** — `money_attribute :price, currency: 'USD', allow_nil: true`
 1. **Method-level currency** — lambda-based currency resolution for multi-tenant and instance-level scenarios
 1. **Migration helper**
 

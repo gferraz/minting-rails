@@ -19,9 +19,9 @@ module Mint
     test 'aggregated money attribute parses any amount to the default currency' do
       offer = Offer.new(price: '12')
 
-      assert_equal Mint.money(12, Mint.default_currency), offer.price
+      assert_equal Mint.money(12, 'USD'), offer.price
       assert_equal 12, offer.price_amount
-      assert_equal Mint.default_currency.code, offer.price_currency
+      assert_equal 'USD', offer.price_currency
     end
 
     test 'aggregated money attribute is saved correctly' do
@@ -59,7 +59,7 @@ module Mint
       mapped_offer = Class.new(ApplicationRecord) do
         self.table_name = 'offers'
 
-        money_attribute :cost, mapping: {
+        money_attribute :cost, currency: 'USD', mapping: {
           amount: :price_amount,
           currency: :price_currency
         }
@@ -120,7 +120,7 @@ module Mint
         Class.new(ApplicationRecord) do
           self.table_name = 'offers'
 
-          money_attribute :cost, mapping: { amount: :price_amount }
+          money_attribute :cost, currency: 'USD', mapping: { amount: :price_amount }
         end
       end
       assert_includes error.message, 'missing required keys'
@@ -132,7 +132,7 @@ module Mint
         self.table_name = 'offers'
       end
 
-      error = assert_raises(ArgumentError) { invalid_offer.money_attribute :missing_price }
+      error = assert_raises(ArgumentError) { invalid_offer.money_attribute :missing_price, currency: 'USD' }
       assert_includes error.message, 'Expected: missing_price_amount, missing_price_currency'
       assert_includes error.message, 'Found:'
     end
@@ -142,7 +142,7 @@ module Mint
         Class.new(ApplicationRecord) do
           self.table_name = 'offers'
 
-          money_attribute :cost, mapping: { price_amount: :amount }
+          money_attribute :cost, currency: 'USD', mapping: { price_amount: :amount }
         end
       end
       assert_includes error.message, 'missing required keys'
@@ -156,7 +156,7 @@ module Mint
       assert_equal 23.euros, parser.parse(23, 'EUR')
       assert_equal(-25.34.dollars, parser.parse('-25.34'))
       assert_equal(-25.34.dollars, parser.parse('-25.34 EUR'))
-      assert_nil MoneyAttribute::Parser.new.parse(nil, 'USD')
+      assert_nil MoneyAttribute::Parser.new('USD').parse(nil, 'USD')
       assert_raises(TypeError) { parser.parse(23.euros, 'USD') }
     end
 
@@ -165,7 +165,7 @@ module Mint
         Class.new(ApplicationRecord) do
           self.table_name = 'offers'
 
-          money_attribute :cost, mapping: {
+          money_attribute :cost, currency: 'USD', mapping: {
             amount: :price_amount
           }
         end

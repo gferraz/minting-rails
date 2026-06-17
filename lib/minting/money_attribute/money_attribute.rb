@@ -7,7 +7,7 @@ module Mint
 
     class_methods do
       # Money attribute
-      def money_attribute(name, currency: Mint.default_currency, mapping: nil)
+      def money_attribute(name, currency:, mapping: nil)
         currency = Currency.resolve!(currency)
         parser = Parser.new(currency)
         if attribute_names.include? name.to_s

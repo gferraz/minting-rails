@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Breaking changes
+- Removed all global configuration (`Mint.configure`, `Mint.config`, `Mint.default_currency`). `money_attribute` now requires explicit `currency:` on every declaration. Custom currencies are registered via `Mint::Currency.register(code:, subunit:, symbol:)` in the initializer.
+
 ## [v0.8.1](https://github.com/gferraz/minting-rails/releases/tag/v0.8.1) (2026-06-17)
 
 [Full Changelog](https://github.com/gferraz/minting-rails/compare/v0.8.0...v0.8.1)

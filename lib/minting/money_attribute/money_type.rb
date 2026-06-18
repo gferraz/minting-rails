@@ -13,7 +13,7 @@ module Mint
       case value
       when NilClass, Numeric, String then return
       when Mint::Money
-        return if value.currency == @currency
+        return if @currency.code == 'XXX' || value.currency == @currency
 
         message = "'#{value.inspect}' has different currency. Only #{@currency.code} allowed."
       else

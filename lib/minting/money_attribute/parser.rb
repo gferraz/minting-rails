@@ -15,7 +15,7 @@ module Mint
         when Numeric     then Mint::Money.from(amount, currency)
         when String      then Mint::Money.from(amount.to_r, currency)
         when Mint::Money
-          return amount if amount.currency == currency
+          return amount if currency.code == 'XXX' || amount.currency == currency
 
           raise TypeError, "Cannot automatically convert #{amount} to #{currency.code}"
         else

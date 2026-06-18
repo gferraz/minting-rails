@@ -53,6 +53,56 @@ module Mint
       assert_equal 45.34.dollars, transaction.amount
     end
 
+    test 'currency_via writes fractional amount and virtual currency code' do
+      transaction = FinancialTransaction.new(amount: 45.34.dollars)
+
+      assert_equal 4534, transaction.read_attribute(:amount)
+      assert_equal 'USD', transaction.read_attribute(:_amount_currency_code)
+    end
+
+    test 'currency_via saves and reloads using currency association' do
+      ::Currency.create!(code: 'USD', subunit: 2, symbol: '$')
+      ::Currency.create!(code: 'EUR', subunit: 2, symbol: '€')
+
+      transaction = FinancialTransaction.new(amount: 45.34.dollars)
+      transaction.save!
+
+      assert_equal 45.34.dollars, transaction.amount
+      assert_equal 'USD', transaction.currency.code
+      assert_equal 4534, transaction.read_attribute(:amount)
+
+      reloaded = FinancialTransaction.find(transaction.id)
+
+      assert_equal 45.34.dollars, reloaded.amount
+      assert_equal 'USD', reloaded.currency.code
+    end
+
+    test 'currency_via writes integer amount as fractional' do
+      ::Currency.create!(code: 'USD', subunit: 2, symbol: '$')
+
+      transaction = FinancialTransaction.new(amount: 54.32.dollars)
+
+      assert_equal 5432, transaction.read_attribute(:amount)
+      assert_equal 'USD', transaction.read_attribute(:_amount_currency_code)
+      transaction.save!
+
+      assert_equal 'USD', transaction.currency.code
+
+      reloaded = transaction.reload
+
+      assert_equal 54.32.dollars, reloaded.amount
+    end
+
+    test 'currency_via reloads with correct Money via after_find' do
+      ::Currency.create!(code: 'USD', subunit: 2, symbol: '$')
+
+      transaction = FinancialTransaction.create!(amount: 45.34.dollars)
+      reloaded = transaction.reload
+
+      assert_equal 45.34.dollars, reloaded.amount
+      assert_equal 'USD', reloaded.currency.code
+    end
+
     test 'aggregated money attribute supports custom mappings' do
       mapped_offer = Class.new(ApplicationRecord) do
         self.table_name = 'offers'
@@ -130,7 +180,9 @@ module Mint
         self.table_name = 'offers'
       end
 
-      error = assert_raises(ArgumentError) { invalid_offer.money_attribute :missing_price, currency: 'USD' }
+      error = assert_raises(ArgumentError) do
+        invalid_offer.money_attribute :missing_price, currency: 'USD'
+      end
       assert_includes error.message, 'Expected: missing_price_amount, missing_price_currency'
       assert_includes error.message, 'Found:'
     end

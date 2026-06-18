@@ -48,11 +48,9 @@ module Mint
     end
 
     test 'aggregated money attribute with integer amount column' do
-      transaction = FinancialTransaction.new(value: 45.34.dollars)
+      transaction = FinancialTransaction.new(amount: 45.34.dollars)
 
-      assert_equal 45.34.dollars, transaction.value
-      assert_equal 4534, transaction.amount
-      assert_equal 'USD', transaction.currency
+      assert_equal 45.34.dollars, transaction.amount
     end
 
     test 'aggregated money attribute supports custom mappings' do

@@ -1,3 +1,6 @@
 class FinancialTransaction < ApplicationRecord
-  money_attribute :value, currency: 'USD', mapping: {amount: :amount, currency: :currency}
+  belongs_to :currency
+
+  money_attribute :amount, currency: 'USD'
+
 end

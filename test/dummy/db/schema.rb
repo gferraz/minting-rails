@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_17_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_17_000001) do
   create_table "currencies", force: :cascade do |t|
     t.string "code", null: false
     t.datetime "created_at", null: false
@@ -24,10 +24,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_17_000000) do
   create_table "financial_transactions", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", null: false
-    t.string "currency", limit: 3
+    t.integer "currency_id"
     t.datetime "date"
     t.string "description"
     t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_financial_transactions_on_currency_id"
   end
 
   create_table "offers", force: :cascade do |t|
@@ -47,4 +48,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_17_000000) do
     t.string "product"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "financial_transactions", "currencies"
 end

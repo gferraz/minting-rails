@@ -58,34 +58,17 @@ module Mint
         }
         composed_of(name, options)
 
-        return unless currency_via
-
-        currency_class = reflect_on_association(currency_via)&.klass
-        unless currency_class
-          raise ArgumentError,
-                "Association :#{currency_via} not found for money_attribute :#{name}"
-        end
-
-        define_method(:"_ma_af_#{name}_#{currency_via}") do
-          write_attribute(:"_#{name}_currency_code",
-                          send(:"#{currency_via}")&.code)
-        end
-        after_find :"_ma_af_#{name}_#{currency_via}"
-
-        define_method(:"_ma_bv_#{name}_#{currency_via}") do
-          code = read_attribute(:"_#{name}_currency_code")
-          return unless code.present? && code != 'XXX'
-
-          mint_currency = Mint::Currency.resolve!(code)
-          record = currency_class.find_or_create_by!(code:) do |c|
-            c.subunit = mint_currency.subunit
-            c.symbol = mint_currency.symbol
-            c.name = mint_currency.name
+        if currency_via
+          define_method(:"_ma_af_#{name}") do
+            code = if currency_via.respond_to?(:call)
+                     currency_via.call(self)
+                   else
+                     send(currency_via)&.code
+                   end
+            write_attribute(:"_#{name}_currency_code", code)
           end
-          send(:"#{currency_via}=", record)
+          after_find :"_ma_af_#{name}"
         end
-        before_validation :"_ma_bv_#{name}_#{currency_via}"
-      end
 
       def amount_extractor_for(column_name)
         col = columns.find { |c| c.name == column_name.to_s }

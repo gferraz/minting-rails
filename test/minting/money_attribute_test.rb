@@ -88,9 +88,11 @@ module Mint
 
       transaction.currency = usd
       transaction.save!
+
       assert_equal 'USD', transaction.currency.code
 
       reloaded = transaction.reload
+
       assert_equal 54.32.dollars, reloaded.amount
     end
 
@@ -111,8 +113,7 @@ module Mint
 
       klass = Class.new(ApplicationRecord) do
         self.table_name = 'financial_transactions'
-        belongs_to :currency, class_name: '::Currency'
-        money_attribute :amount, currency_via: ->(r) { r.currency&.code }
+        money_attribute :amount, currency_via: ->(_r) { 'USD' }
       end
 
       transaction = klass.new(amount: 45.34.dollars)
@@ -124,18 +125,22 @@ module Mint
     test 'currency_via with callable restores code on reload' do
       usd = ::Currency.create!(code: 'USD', subunit: 2, symbol: '$')
 
+      callable_called = 0
+      code_callable = lambda { |r|
+        callable_called += 1
+        ::Currency.find_by(id: r.currency_id)&.code
+      }
+
       klass = Class.new(ApplicationRecord) do
         self.table_name = 'financial_transactions'
-        belongs_to :currency, class_name: '::Currency'
-        money_attribute :amount, currency_via: ->(r) { r.currency&.code }
+        money_attribute :amount, currency_via: code_callable
       end
 
-      transaction = klass.new(amount: 45.34.dollars)
-      transaction.currency = usd
-      transaction.save!
+      transaction = klass.create!(amount: 45.34.dollars, currency_id: usd.id)
       reloaded = transaction.reload
 
       assert_equal 45.34.dollars, reloaded.amount
+      assert_equal 1, callable_called # called during reload's after_find
     end
 
     test 'aggregated money attribute supports custom mappings' do

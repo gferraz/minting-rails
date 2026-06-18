@@ -58,17 +58,18 @@ module Mint
         }
         composed_of(name, options)
 
-        if currency_via
-          define_method(:"_ma_af_#{name}") do
-            code = if currency_via.respond_to?(:call)
-                     currency_via.call(self)
-                   else
-                     send(currency_via)&.code
-                   end
-            write_attribute(:"_#{name}_currency_code", code)
-          end
-          after_find :"_ma_af_#{name}"
+        return unless currency_via
+
+        define_method(:"_ma_af_#{name}") do
+          code = if currency_via.respond_to?(:call)
+                   currency_via.call(self)
+                 else
+                   send(currency_via)&.code
+                 end
+          write_attribute(:"_#{name}_currency_code", code)
         end
+        after_find :"_ma_af_#{name}"
+      end
 
       def amount_extractor_for(column_name)
         col = columns.find { |c| c.name == column_name.to_s }

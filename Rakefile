@@ -21,8 +21,15 @@ task :test_db_migrate do
   end
 end
 
-desc 'Run tests (migrates test DB first)'
-task test: %i[test_db_migrate test_run]
+desc 'Seed test database'
+task :test_db_seed do
+  Dir.chdir('test/dummy') do
+    sh({ 'RAILS_ENV' => 'test' }, 'bin/rails', 'db:seed')
+  end
+end
+
+desc 'Run tests (migrates and seeds test DB first)'
+task test: %i[test_db_migrate test_db_seed test_run]
 
 desc 'Run minting-rails vs money-rails benchmark'
 task :bench do

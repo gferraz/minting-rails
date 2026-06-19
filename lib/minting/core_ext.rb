@@ -16,7 +16,7 @@ class Numeric
 
   alias dollar dollars
   alias euro euros
-  alias mint to_money
+  alias money to_money
 end
 
 # :nodoc
@@ -25,5 +25,5 @@ class String
     Mint.money(to_r, currency)
   end
 
-  alias mint to_money
+  alias money to_money
 end

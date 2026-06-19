@@ -39,9 +39,11 @@ module Mint
 
       transaction.currency = usd
       transaction.save!
+
       assert_equal 'USD', transaction.currency.code
 
       reloaded = transaction.reload
+
       assert_equal 54.32.dollars, reloaded.amount
     end
 

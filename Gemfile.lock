@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minting-rails (0.8.3)
+    minting-rails (0.8.4)
       minting (>= 1.8.1)
       rails (>= 7.1.3.2)
 
@@ -422,7 +422,7 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   minting (1.8.2) sha256=b1a03c31da508d1231895ef4dcf474034d3953de873a8ced6001e380dc6dfd6e
-  minting-rails (0.8.3)
+  minting-rails (0.8.4)
   monetize (2.0.0) sha256=152980cadff9fd11a95817d56e3d7d69b07998c4506f15d971edf05851f82aba
   money (7.0.2) sha256=615c27c1fd1d190dceda5c5f4dd5af5f4d20f790ff3b62ea2fe2d96eb22e2c60
   money-rails (3.0.0) sha256=f4bd1c8e1c98d221e7bf452eeb52e240f41224e43da2a477a5659a87c0c95bae

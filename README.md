@@ -1,3 +1,14 @@
+> **⚠️ DEPRECATED — use [money-attribute](https://github.com/gferraz/money-attribute) instead.**
+>
+> Since June of 2026, `minting-rails` has been renamed to **money-attribute** and will no longer be maintained.
+> All future development happens under the new name. Update your Gemfile:
+>
+> ```ruby
+> gem 'money-attribute'
+> ```
+>
+> The API is identical — just replace the gem name and you're done.
+
 # Minting::Rails
 
 [![CI](https://github.com/gferraz/minting-rails/actions/workflows/ci.yml/badge.svg)](https://github.com/gferraz/minting-rails/actions/workflows/ci.yml)

@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Deprecation
+- **minting-rails has been renamed to `money-attribute`** — this gem will no longer be maintained. See [money-attribute](https://github.com/gferraz/money-attribute) for all future development. The API is identical; replace `gem 'minting-rails'` with `gem 'money-attribute'` in your Gemfile.
+- Added `post_install_message` and `deprecated_at` metadata to the gemspec.
+- Added deprecation banner to README.
+
 ## [v0.8.3](https://github.com/gferraz/minting-rails/releases/tag/v0.8.3) (2026-06-20)
 
 [Full Changelog](https://github.com/gferraz/minting-rails/compare/v0.8.2...v0.8.3)

@@ -12,6 +12,12 @@ Gem::Specification.new do |spec|
   spec.description = ''
   spec.license     = 'MIT'
 
+  spec.post_install_message = "\n⚠️  `minting-rails` has been renamed to `money-attribute` " \
+                              "and will no longer be maintained.\n" \
+                              "Update your Gemfile:\n\n  " \
+                              "gem 'money-attribute'\n\n" \
+                              "The API is identical — just replace the gem name and you're done.\n"
+
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
@@ -20,6 +26,9 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = "#{spec.homepage}/releases"
   spec.metadata['bug_tracker_uri'] = "#{spec.homepage}/issues"
   spec.metadata['rubygems_mfa_required'] = 'true'
+
+  spec.metadata['deprecated_at'] = Time.new(2026, 6, 15)
+  spec.metadata['replaced_by'] = 'money-attribute'
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
